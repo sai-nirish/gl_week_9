@@ -3,6 +3,7 @@ package com.example.greatlearning.serviceImpl;
 import com.example.greatlearning.entity.AuditLog;
 import com.example.greatlearning.repository.AuditRepository;
 import com.example.greatlearning.service.AuditService;
+import com.example.greatlearning.utils.DateFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,18 +19,20 @@ public class AuditServiceImpl implements AuditService {
     @Autowired
     AuditRepository auditRepository;
 
+    DateFactory dateFactory = new DateFactory();
+
     @Override
     public List<AuditLog> getAllBillsToday() {
-        Date currentDate = new Date();
+        Date currentDate = dateFactory.getCurrentDate();
         return auditRepository.getTotalBillsOnDate(currentDate);
     }
 
     @Override
     public Integer getTotalSalesForMonth() {
-        LocalDate todaydate = LocalDate.now();
-        Date currentDate = new Date();
+        LocalDate todaydate = dateFactory.getCurrentDateInLocal();
+        Date currentDate = dateFactory.getCurrentDate();
         todaydate = todaydate.withDayOfMonth(1);
-        Date fromDate = java.sql.Date.valueOf(todaydate);
+        Date fromDate = dateFactory.getDateFromLocalDate(todaydate);
         return auditRepository.getTotalSalesBetweenDates(fromDate, currentDate);
     }
 }
