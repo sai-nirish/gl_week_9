@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class ItemControllerTest extends BaseControllerTest{
+public class UserControllerTest extends BaseControllerTest{
 
     private String USER_URI = "/users";
 
@@ -38,7 +38,7 @@ public class ItemControllerTest extends BaseControllerTest{
 
     @Test
     @WithMockUser
-    @DisplayName(value = "Get all items")
+    @DisplayName(value = "An user can get all items")
     public void testGetAllItems() throws Exception {
         final String uri = USER_URI + "/items";
 
@@ -53,7 +53,7 @@ public class ItemControllerTest extends BaseControllerTest{
 
     @Test
     @WithMockUser
-    @DisplayName(value = "Get items by id")
+    @DisplayName(value = "An user can get items by id")
     public void testItemsById() throws Exception {
         final String uri = USER_URI + "/items/1";
         String json = mapper.writeValueAsString(items.get(0));
@@ -66,7 +66,7 @@ public class ItemControllerTest extends BaseControllerTest{
 
     @Test
     @WithMockUser
-    @DisplayName(value = "Get items by ids")
+    @DisplayName(value = "An user can get items by ids")
     public void testItemsByIds() throws Exception {
         final String uri = USER_URI + "/items/ids";
         List<Integer> ids = new ArrayList<>();
@@ -83,7 +83,7 @@ public class ItemControllerTest extends BaseControllerTest{
 
     @Test
     @WithMockUser
-    @DisplayName(value = "Get Bill by ids")
+    @DisplayName(value = "An user can get Bill by ids")
     public void testBillByIds() throws Exception {
         final String uri = USER_URI + "/items/bill";
         List<Integer> ids = new ArrayList<>();
